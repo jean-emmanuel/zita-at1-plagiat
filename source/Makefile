@@ -24,7 +24,7 @@ SUFFIX := $(shell uname -m | sed -e 's/^unknown/$//' -e 's/^i.86/$//' -e 's/^x86
 LIBDIR = lib$(SUFFIX)
 BINDIR = $(PREFIX)/bin
 SHARED = $(PREFIX)/share/zita-at1
-VERSION = 0.4.0
+VERSION = 0.4.1
 CPPFLAGS += -MMD -MP -DVERSION=\"$(VERSION)\" -DSHARED=\"$(SHARED)\"
 CXXFLAGS += -O2 -ffast-math -Wall -MMD -MP
 CXXFLAGS += -march=native
@@ -38,7 +38,7 @@ zita-at1:	CPPFLAGS += -I/usr/X11R6/include `freetype-config --cflags`
 zita-at1:	LDLIBS += -lcairo -lclxclient -lclthreads -lzita-resampler -lfftw3f -ljack -lpthread -lpng -lXft -lX11 -lrt
 zita-at1:	LDFLAGS += -L/usr/X11R6/lib
 zita-at1:	LDFLAGS += -pthread
-zita-at1:	$(ZITA-AT1_O) 
+zita-at1:	$(ZITA-AT1_O)
 	g++ $(LDFLAGS) -o $@ $(ZITA-AT1_O) $(LDLIBS)
 $(ZITA-AT1_O):
 -include $(ZITA-AT1_O:%.o=%.d)
@@ -61,4 +61,3 @@ uninstall:
 clean:
 	/bin/rm -f *~ *.o *.a *.d *.so
 	/bin/rm -f zita-at1
-

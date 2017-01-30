@@ -1,5 +1,11 @@
 See doc/quickguide.html
 
+Version 0.4.1 (30/01/2017)
+--------------------------
+
+* Add command-line options to set knobs default values
+
+
 Version 0.4.0 (15/8/2014)
 --------------------------
 
@@ -17,4 +23,3 @@ Version 0.2.0 (10/12/2010)
   cent (1/100 semitone) each, and displays the set
   value when touched. Default mousewheel step is 10
   cents, 1 cent with Shift pressed.
-
