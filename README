@@ -1,9 +1,15 @@
-See doc/quickguide.html
+**Changelog**
+
+[forked zita-at1-plagiat]
+
 
 Version 0.4.1 (30/01/2017)
 --------------------------
 
 * Add command-line options to set knobs default values
+
+
+[Original zita-at1]
 
 
 Version 0.4.0 (15/8/2014)
