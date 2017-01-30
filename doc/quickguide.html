@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
+<meta http-equiv="Content-Language" content="en">
+<link rel="stylesheet" type="text/css" href="styles.css">
+<title>AT1 - Quick guide</title>
+</head>
+
+<body>
+
+<table border="0" cellpadding="0" cellspacing="10" width="950">
+<tbody>
+
+<tr height="50">
+<td width="150">
+<img src="redzita.png" border=0>
+</td>
+<td width="850" align="center">
+<h2>AT1 - Quick guide</h2>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="content">
+<p>AT1 is an 'autotuner', normally used to correct the pitch of a voice
+singing (slightly) out of tune. Compared to 'Autotalent' it provides an
+improved pitch estimation algorithm, and much cleaner resampling. AT1 does
+not include formant correction, so it should be used to correct small errors
+only and not to really transpose a song. The 'expected' pitch can be controlled
+by Midi (via Jack only), or be a fixed set of notes. AT1 can probably be used
+on some instruments as well, but is primarily designed to cover the vocal
+range. It's also usable as a quick and dirty guitar tuner.</p>
+<p>The resampling algorithm in zita-at1 is designed to produce an absolute
+minimum of artefacts and distortion, see the pictures at the bottom of this
+page.</p>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td align="center">
+<img src="zita-at1.png" border=0>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td class="content">
+<p> The rotary knobs can be used in two ways:</p>
+<p> * Click on the knob with the <b>left</b> mouse button, keep it pressed
+and move either left..right or up..down.</p>
+<p> * Using the <b>mouse wheel</b>. Press Shift for smaller steps.</p>
+<p>From Left to right we have:</p>
+<p><b>* Midi indicator.</b>
+Apart from the static note selection AT1 also accepts Midi
+note on/off messages. If the set of notes enabled in this
+way is not empty it takes priority over the static selection.
+This is indicated by this button lighting up. Clicking on it
+will reset any 'hanging' Midi notes.</p>
+<p><b>* Midi channel selection.</b>
+This can be 'Omni' or 1..16. Left/right click or use the
+mouse wheel to change.</p>
+<p><b>* Note selection buttons.</b>
+These select which notes are accepted as 'correct' ones. By
+default all 12 are enabled. Depending on the key of the tune being
+processed it can help to disable some of them. These buttons also
+indicate the current note as selected by the pitch estimator.</p>
+<p><b>* Pitch error meter.</b>
+Indicates the pitch error of the input signal w.r.t. the current
+note. The range is +/- one semitone.</p>
+<p><b>* Tuning.</b> This sets the frequency corresping to 
+'A' pitch, in other words the required tuning. This will be
+the default 440 Hz in most cases. The exact value is displayed
+whenever this control is touched, and can be set in steps of 0.2
+Hz.</p> 
+<p><b>* Bias.</b> Normally the pitch estimator will select the
+enabled note closest to the measured pitch. The Bias control
+adds some preference for the current note - this allows it to
+go off-tune more than would be the case otherwise.</p>
+<p><b>* Filter.</b> This sets the amount of smoothing on the
+pitch correction while the current note does not change. If it
+does change the filter is bypassed and the correction jumps
+immediately to the new value.</p>
+<p><b>* Correction.</b> Determines how much of the estimated pitch
+error gets corrected. Full correction may remove expression or
+vibrato.</p>
+<p><b>* Offset.</b> Adds an offset in the range of +/- two
+semitones to the pitch correction. With the Correction control
+set to zero the result is a constant pitch change.</p>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td align="center">
+<img src="zita-at1-1kHz.png" border=0>
+</td>
+</tr>
+<tr>
+<td align="center"><a href="index.html">Back</a></td>
+<td class="content" align="center">Zita-at1 retuning 1kHz to B.</td>
+</tr>
+
+<tr>
+<td></td>
+<td align="center">
+<img src="talented-1kHz.png" border=0>
+</td>
+</tr>
+<tr>
+<td align="center"><a href="index.html">Back</a></td>
+<td class="content" align="center">The talentedhack LV2 plugin retuning 1kHz to B.</td>
+</tr>
+
+
+
+
+</tbody>
+</table>
+
+</body>

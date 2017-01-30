@@ -1,0 +1,20 @@
+See doc/quickguide.html
+
+Version 0.4.0 (15/8/2014)
+--------------------------
+
+* Bugfixes, added MIDI channel selection.
+
+
+Version 0.2.0 (10/12/2010)
+--------------------------
+
+* The resampler now uses cubic interpolation (at twice
+  the sample rate for 44.1 and 48 kHz), giving even
+  cleaner output.
+
+* The offset control now has 400 steps of exactly 1
+  cent (1/100 semitone) each, and displays the set
+  value when touched. Default mousewheel step is 10
+  cents, 1 cent with Shift pressed.
+
