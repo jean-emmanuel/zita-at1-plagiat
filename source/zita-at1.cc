@@ -30,7 +30,7 @@
 #include "mainwin.h"
 
 
-#define NOPTS 3
+#define NOPTS 8
 #define CP (char *)
 
 
@@ -38,7 +38,12 @@ XrmOptionDescRec options [NOPTS] =
 {
     {CP"-h",    CP".help",      XrmoptionNoArg,   CP"true" },
     {CP"-g",    CP".geometry",  XrmoptionSepArg,  0        },
-    {CP"-s",    CP".server",    XrmoptionSepArg,  0        }
+    {CP"-s",    CP".server",    XrmoptionSepArg,  0        },
+    {CP"-t",    CP".tuning",    XrmoptionSepArg,  0        },
+    {CP"-b",    CP".bias",      XrmoptionSepArg,  0        },
+    {CP"-f",    CP".filter",    XrmoptionSepArg,  0        },
+    {CP"-c",    CP".correction",XrmoptionSepArg,  0        },
+    {CP"-o",    CP".offset",    XrmoptionSepArg,  0        }
 };
 
 
@@ -56,6 +61,11 @@ static void help (void)
     fprintf (stderr, "  -name <name>    Jack client name\n");
     fprintf (stderr, "  -s <server>     Jack server name\n");
     fprintf (stderr, "  -g <geometry>   Window position\n");
+    fprintf (stderr, "  -t tuning       Tuning knob value [400 : 480]\n");
+    fprintf (stderr, "  -b bias         Bias knob value [0 : 1]\n");
+    fprintf (stderr, "  -f filter       Filter knob value [0.5 : 0.02]\n");
+    fprintf (stderr, "  -c correction   Correction knob value [0 : 1]\n");
+    fprintf (stderr, "  -o offset       Offset knob value [-2 : 2]\n");
     exit (1);
 }
 

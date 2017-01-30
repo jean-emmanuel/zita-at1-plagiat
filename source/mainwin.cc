@@ -37,6 +37,7 @@ Mainwin::Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jc
     X_hints     H;
     char        s [256];
     int         i, j, x, y;
+    float       t, b, f, c, o;
 
     _atom = XInternAtom (dpy (), "WM_DELETE_WINDOW", True);
     XSetWMProtocols (dpy (), win (), &_atom, 1);
@@ -81,17 +82,24 @@ Mainwin::Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jc
 	    x += 10;
             if (j & 1) y += 18;
 	    else       y -= 18;
-	} 
+	}
     }
 
 
     RotaryCtl::init (disp ());
     x = 270;
-    _rotary [R_TUNE] = new Rlinctl (this, this, R_TUNE, &r_tune_geom, x, 0, 400,  5, 400.0, 480.0, 440.0);
-    _rotary [R_BIAS] = new Rlinctl (this, this, R_BIAS, &r_bias_geom, x, 0, 270,  5,   0.0,   1.0,   0.5);
-    _rotary [R_FILT] = new Rlogctl (this, this, R_FILT, &r_filt_geom, x, 0, 200,  5,   0.50,  0.02,  0.1);
-    _rotary [R_CORR] = new Rlinctl (this, this, R_CORR, &r_corr_geom, x, 0, 270,  5,   0.0,   1.0,   1.0);
-    _rotary [R_OFFS] = new Rlinctl (this, this, R_OFFS, &r_offs_geom, x, 0, 400, 10,  -2.0,   2.0,   0.0);
+
+    t = (xres->get(".tuning", 0) == 0) ? 440.0   : atof(xres->get(".tuning", 0));
+    b = (xres->get(".bias", 0) == 0) ? 0.5       : atof(xres->get(".bias", 0));
+    f = (xres->get(".filter", 0) == 0) ? 0.1     : atof(xres->get(".filter", 0));
+    c = (xres->get(".correction", 0) == 0) ? 0.5 : atof(xres->get(".correction", 0));
+    o = (xres->get(".offset", 0) == 0) ? 0.0     : atof(xres->get(".offset", 0));
+
+    _rotary [R_TUNE] = new Rlinctl (this, this, R_TUNE, &r_tune_geom, x, 0, 400,  5, 400.0, 480.0, t);
+    _rotary [R_BIAS] = new Rlinctl (this, this, R_BIAS, &r_bias_geom, x, 0, 270,  5,   0.0,   1.0,  b);
+    _rotary [R_FILT] = new Rlogctl (this, this, R_FILT, &r_filt_geom, x, 0, 200,  5,   0.50,  0.02,  f);
+    _rotary [R_CORR] = new Rlinctl (this, this, R_CORR, &r_corr_geom, x, 0, 270,  5,   0.0,   1.0,   c);
+    _rotary [R_OFFS] = new Rlinctl (this, this, R_OFFS, &r_offs_geom, x, 0, 400, 10,  -2.0,   2.0,   o);
     for (i = 0; i < NROTARY; i++) _rotary [i]->x_map ();
 
     _textln = new X_textip (this, 0, &tstyle1, 0, 0, 50, 15, 15);
