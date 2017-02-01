@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------
 //
 //  Copyright (C) 2010-2014 Fons Adriaensen <fons@linuxaudio.org>
-//    
+//
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation; either version 2 of the License, or
@@ -50,7 +50,7 @@ Mainwin::Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jc
     H.maxsize (XSIZE, YSIZE);
     H.rname (xres->rname ());
     H.rclas (xres->rclas ());
-    x_apply (&H); 
+    x_apply (&H);
 
     x = 20;
     _bmidi = new Pbutt0 (this, this, &b_midi_img, x, 12, B_MIDI);
@@ -72,7 +72,7 @@ Mainwin::Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jc
         _bnote [i] = new Pbutt1 (this, this, &b_note_img, x, y, i);
         _bnote [i]->set_state (1);
         _bnote [i]->x_map ();
-	if (j == 4) 
+	if (j == 4)
 	{
 	    x += 20;
 	    j++;
@@ -99,7 +99,7 @@ Mainwin::Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jc
     _rotary [R_BIAS] = new Rlinctl (this, this, R_BIAS, &r_bias_geom, x, 0, 270,  5,   0.0,   1.0,  b);
     _rotary [R_FILT] = new Rlogctl (this, this, R_FILT, &r_filt_geom, x, 0, 200,  5,   0.50,  0.02,  f);
     _rotary [R_CORR] = new Rlinctl (this, this, R_CORR, &r_corr_geom, x, 0, 270,  5,   0.0,   1.0,   c);
-    _rotary [R_OFFS] = new Rlinctl (this, this, R_OFFS, &r_offs_geom, x, 0, 400, 10,  -2.0,   2.0,   o);
+    _rotary [R_OFFS] = new Rlinctl (this, this, R_OFFS, &r_offs_geom, x, 0, 400, 10,  -24.0,   24.0,   o);
     for (i = 0; i < NROTARY; i++) _rotary [i]->x_map ();
 
     _textln = new X_textip (this, 0, &tstyle1, 0, 0, 50, 15, 15);
@@ -114,19 +114,19 @@ Mainwin::Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jc
     _jclient->retuner ()->set_corrgain (_rotary [R_CORR]->value ());
     _jclient->retuner ()->set_corroffs (_rotary [R_OFFS]->value ());
 
-    x_add_events (ExposureMask); 
-    x_map (); 
+    x_add_events (ExposureMask);
+    x_map ();
     set_time (0);
     inc_time (500000);
 }
 
- 
+
 Mainwin::~Mainwin (void)
 {
     RotaryCtl::fini ();
 }
 
- 
+
 int Mainwin::process (void)
 {
     int e;
@@ -150,8 +150,8 @@ void Mainwin::handle_event (XEvent *E)
     {
     case Expose:
 	expose ((XExposeEvent *) E);
-	break;  
- 
+	break;
+
     case ClientMessage:
         clmesg ((XClientMessageEvent *) E);
         break;
@@ -275,16 +275,16 @@ void Mainwin::handle_callb (int type, X_window *W, XEvent *E)
             _jclient->retuner ()->set_refpitch (v);
 	    showval (k);
 	    break;
-	case R_BIAS:   
+	case R_BIAS:
             _jclient->retuner ()->set_notebias (_rotary [R_BIAS]->value ());
 	    break;
-	case R_FILT:   
+	case R_FILT:
             _jclient->retuner ()->set_corrfilt (_rotary [R_FILT]->value ());
 	    break;
-	case R_CORR:   
+	case R_CORR:
             _jclient->retuner ()->set_corrgain (_rotary [R_CORR]->value ());
 	    break;
-	case R_OFFS:   
+	case R_OFFS:
             _jclient->retuner ()->set_corroffs (_rotary [R_OFFS]->value ());
 	    showval (k);
 	    break;
@@ -308,7 +308,7 @@ void Mainwin::setchan (int d)
     }
     else _bchan->set_text ("Omni", 0);
     _jclient->set_midichan (_midich - 1);
-}   
+}
 
 
 void Mainwin::showval (int k)
@@ -343,5 +343,3 @@ void Mainwin::redraw (void)
     x = XSIZE - 35;
     XPutImage (dpy (), win (), dgc (), redzita_img, 0, 0, x, 0, 35, 75);
 }
-
-

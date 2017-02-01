@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------
 //
 //  Copyright (C) 2010-2011 Fons Adriaensen <fons@linuxaudio.org>
-//    
+//
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation; either version 2 of the License, or
@@ -65,7 +65,7 @@ static void help (void)
     fprintf (stderr, "  -b bias         Bias knob value [0 : 1]\n");
     fprintf (stderr, "  -f filter       Filter knob value [0.5 : 0.02]\n");
     fprintf (stderr, "  -c correction   Correction knob value [0 : 1]\n");
-    fprintf (stderr, "  -o offset       Offset knob value [-2 : 2]\n");
+    fprintf (stderr, "  -o offset       Offset knob value [-24 : 24]\n");
     exit (1);
 }
 
@@ -87,7 +87,7 @@ int main (int ac, char *av [])
 
     xresman.init (&ac, av, CP PROGNAME, options, NOPTS);
     if (xresman.getb (".help", 0)) help ();
-            
+
     display = new X_display (xresman.get (".display", 0));
     if (display->dpy () == 0)
     {
@@ -112,7 +112,7 @@ int main (int ac, char *av [])
     ITC_ctrl::connect (jclient, EV_EXIT, mainwin, EV_EXIT);
 
     if (mlockall (MCL_CURRENT | MCL_FUTURE)) fprintf (stderr, "Warning: memory lock failed.\n");
-    signal (SIGINT, sigint_handler); 
+    signal (SIGINT, sigint_handler);
 
     do
     {
@@ -127,16 +127,13 @@ int main (int ac, char *av [])
             rootwin->handle_event ();
 	}
     }
-    while (ev != EV_EXIT);	
+    while (ev != EV_EXIT);
 
     styles_fini (display);
     delete jclient;
     delete handler;
     delete rootwin;
     delete display;
-   
+
     return 0;
 }
-
-
-
