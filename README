@@ -1,3 +1,29 @@
+**Usage**
+
+Options:
+  -h               Display this text
+  -name <name>     Jack client name
+  -s <server>      Jack server name
+  -g <geometry>    Window position
+  -p <port>        OSC port
+  -t <tuning>      Tuning knob value [400 : 480]
+  -b <bias>        Bias knob value [0 : 1]
+  -f <filter>      Filter knob value [0.5 : 0.02]
+  -c <correction>  Correction knob value [0 : 1]
+  -o <offset>      Offset knob value [-24 : 24]
+
+
+**Osc API**
+
+/set ,sf tuning     value
+/set ,sf bias       value
+/set ,sf filter     value
+/set ,sf correction value
+/set ,sf offset     value
+
+note: only the first letter of the parameter string is mandatory
+
+
 **Changelog**
 
 [forked zita-at1-plagiat]

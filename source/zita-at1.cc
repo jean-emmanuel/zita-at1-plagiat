@@ -54,7 +54,7 @@ XrmOptionDescRec options [NOPTS] =
 
 static Jclient  *jclient = 0;
 static Mainwin  *mainwin = 0;
-// static OSCServer      *oscserver = 0;
+
 OSCServer * oscserver;
 
 static void help (void)
@@ -62,16 +62,16 @@ static void help (void)
     fprintf (stderr, "\n%s-%s\n\n", PROGNAME, VERSION);
     fprintf (stderr, "  (C) 2010-2014 Fons Adriaensen  <fons@linuxaudio.org>\n\n");
     fprintf (stderr, "Options:\n");
-    fprintf (stderr, "  -h              Display this text\n");
-    fprintf (stderr, "  -name <name>    Jack client name\n");
-    fprintf (stderr, "  -s <server>     Jack server name\n");
-    fprintf (stderr, "  -p port         OSC port\n");
-    fprintf (stderr, "  -g <geometry>   Window position\n");
-    fprintf (stderr, "  -t tuning       Tuning knob value [400 : 480]\n");
-    fprintf (stderr, "  -b bias         Bias knob value [0 : 1]\n");
-    fprintf (stderr, "  -f filter       Filter knob value [0.5 : 0.02]\n");
-    fprintf (stderr, "  -c correction   Correction knob value [0 : 1]\n");
-    fprintf (stderr, "  -o offset       Offset knob value [-24 : 24]\n");
+    fprintf (stderr, "  -h               Display this text\n");
+    fprintf (stderr, "  -name <name>     Jack client name\n");
+    fprintf (stderr, "  -s <server>      Jack server name\n");
+    fprintf (stderr, "  -g <geometry>    Window position\n");
+    fprintf (stderr, "  -p <port>        OSC port\n");
+    fprintf (stderr, "  -t <tuning>      Tuning knob value [400 : 480]\n");
+    fprintf (stderr, "  -b <bias>        Bias knob value [0 : 1]\n");
+    fprintf (stderr, "  -f <filter>      Filter knob value [0.5 : 0.02]\n");
+    fprintf (stderr, "  -c <correction>  Correction knob value [0 : 1]\n");
+    fprintf (stderr, "  -o <offset>      Offset knob value [-24 : 24]\n");
     exit (1);
 }
 
