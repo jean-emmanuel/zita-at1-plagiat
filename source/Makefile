@@ -33,9 +33,9 @@ CXXFLAGS += -march=native
 all:	zita-at1
 
 ZITA-AT1_O = zita-at1.o styles.o jclient.o mainwin.o png2img.o guiclass.o \
-             button.o rotary.o tmeter.o retuner.o
+             button.o rotary.o tmeter.o retuner.o oscserver.o
 zita-at1:	CPPFLAGS += -I/usr/X11R6/include `freetype-config --cflags`
-zita-at1:	LDLIBS += -lcairo -lclxclient -lclthreads -lzita-resampler -lfftw3f -ljack -lpthread -lpng -lXft -lX11 -lrt
+zita-at1:	LDLIBS += -lcairo -lclxclient -lclthreads -lzita-resampler -lfftw3f -ljack -lpthread -lpng -lXft -lX11 -lrt -llo
 zita-at1:	LDFLAGS += -L/usr/X11R6/lib
 zita-at1:	LDFLAGS += -pthread
 zita-at1:	$(ZITA-AT1_O)

@@ -28,6 +28,8 @@
 #include "jclient.h"
 #include "tmeter.h"
 #include "global.h"
+#include "oscserver.h"
+
 
 
 class Mainwin : public A_thread, public X_window, public X_callback
@@ -36,19 +38,22 @@ public:
 
     enum { XSIZE = 640, YSIZE = 75 };
 
-    Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jclient);
+    Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jclient, OSCServer *oscserver);
     ~Mainwin (void);
     Mainwin (const Mainwin&);
     Mainwin& operator=(const Mainwin&);
 
     void stop (void) { _stop = true; }
-    int process (void); 
+    int process (void);
+
+    static int osc_callback(const char *path, const char *types, lo_arg ** argv,
+                    int argc, void *data, void *user_data);
 
 private:
 
     enum { B_MIDI = 12, B_CHAN = 13 };
     enum { R_TUNE, R_FILT, R_BIAS, R_CORR, R_OFFS, NROTARY };
- 
+
     virtual void thr_main (void) {}
 
     void handle_time (void);

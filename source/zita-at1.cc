@@ -29,9 +29,12 @@
 #include "jclient.h"
 #include "mainwin.h"
 
+#include "oscserver.h"
+
 
 #define NOPTS 8
 #define CP (char *)
+
 
 
 XrmOptionDescRec options [NOPTS] =
@@ -50,7 +53,8 @@ XrmOptionDescRec options [NOPTS] =
 
 static Jclient  *jclient = 0;
 static Mainwin  *mainwin = 0;
-
+// static OSCServer      *oscserver = 0;
+OSCServer * oscserver;
 
 static void help (void)
 {
@@ -101,10 +105,13 @@ int main (int ac, char *av [])
     ys = Mainwin::YSIZE + 30;
     xresman.geometry (".geometry", display->xsize (), display->ysize (), 1, xp, yp, xs, ys);
 
+    oscserver = new OSCServer (9999);
+    oscserver->start();
+
     styles_init (display, &xresman);
     jclient = new Jclient (xresman.rname (), xresman.get (".server", 0));
     rootwin = new X_rootwin (display);
-    mainwin = new Mainwin (rootwin, &xresman, xp, yp, jclient);
+    mainwin = new Mainwin (rootwin, &xresman, xp, yp, jclient, oscserver);
     rootwin->handle_event ();
     handler = new X_handler (display, mainwin, EV_X11);
     handler->next_event ();
@@ -134,6 +141,7 @@ int main (int ac, char *av [])
     delete handler;
     delete rootwin;
     delete display;
+    oscserver->stop();
 
     return 0;
 }

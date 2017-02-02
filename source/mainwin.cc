@@ -26,8 +26,7 @@
 #include "global.h"
 #include "mainwin.h"
 
-
-Mainwin::Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jclient) :
+Mainwin::Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jclient, OSCServer *oscserver) :
     A_thread ("Main"),
     X_window (parent, xp, yp, XSIZE, YSIZE, XftColors [C_MAIN_BG]->pixel),
     _stop (false),
@@ -118,6 +117,10 @@ Mainwin::Mainwin (X_rootwin *parent, X_resman *xres, int xp, int yp, Jclient *jc
     x_map ();
     set_time (0);
     inc_time (500000);
+
+
+    oscserver->add_method("/set", "sf", &Mainwin::osc_callback, this);
+
 }
 
 
@@ -126,6 +129,31 @@ Mainwin::~Mainwin (void)
     RotaryCtl::fini ();
 }
 
+int Mainwin::osc_callback(const char *path, const char *types, lo_arg ** argv,
+                int argc, void *data, void *user_data)
+{
+    int param = argv[0]->s;
+    double v = argv[1]->f;
+    Mainwin *self = (Mainwin *)user_data;
+    if (param == "t"[0]) {
+        self->_jclient->retuner ()->set_refpitch(v);
+        self->_rotary[param]->set_value(v); //SEGFAULT
+    }
+
+    if (param == "b"[0])
+        self->_jclient->retuner ()->set_notebias(v);
+
+    if (param == "f"[0])
+        self->_jclient->retuner ()->set_corrfilt(v);
+
+    if (param == "c"[0])
+        self->_jclient->retuner ()->set_corrgain(v);
+
+    if (param == "o"[0])
+        self->_jclient->retuner ()->set_corroffs(v);
+
+    return 0;
+}
 
 int Mainwin::process (void)
 {
