@@ -32,7 +32,7 @@
 #include "oscserver.h"
 
 
-#define NOPTS 8
+#define NOPTS 9
 #define CP (char *)
 
 
@@ -46,7 +46,8 @@ XrmOptionDescRec options [NOPTS] =
     {CP"-b",    CP".bias",      XrmoptionSepArg,  0        },
     {CP"-f",    CP".filter",    XrmoptionSepArg,  0        },
     {CP"-c",    CP".correction",XrmoptionSepArg,  0        },
-    {CP"-o",    CP".offset",    XrmoptionSepArg,  0        }
+    {CP"-o",    CP".offset",    XrmoptionSepArg,  0        },
+    {CP"-p",    CP".port",    XrmoptionSepArg,    0        }
 };
 
 
@@ -64,6 +65,7 @@ static void help (void)
     fprintf (stderr, "  -h              Display this text\n");
     fprintf (stderr, "  -name <name>    Jack client name\n");
     fprintf (stderr, "  -s <server>     Jack server name\n");
+    fprintf (stderr, "  -p port         OSC port\n");
     fprintf (stderr, "  -g <geometry>   Window position\n");
     fprintf (stderr, "  -t tuning       Tuning knob value [400 : 480]\n");
     fprintf (stderr, "  -b bias         Bias knob value [0 : 1]\n");
@@ -105,7 +107,9 @@ int main (int ac, char *av [])
     ys = Mainwin::YSIZE + 30;
     xresman.geometry (".geometry", display->xsize (), display->ysize (), 1, xp, yp, xs, ys);
 
-    oscserver = new OSCServer (9999);
+
+    int port = (xresman.get(".port", 0) == 0) ? 9900   : atof(xresman.get(".port", 0));
+    oscserver = new OSCServer(port);
     oscserver->start();
 
     styles_init (display, &xresman);

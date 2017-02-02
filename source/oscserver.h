@@ -9,7 +9,7 @@ class OSCServer
 
 public:
 
-    OSCServer(const int port = 9900);
+    OSCServer(const int port);
     ~OSCServer();
 
     void start();
