@@ -4,7 +4,8 @@ make clean.
 To build this version, you need the shared libraries
 
   libclthreads-2.4.0
-  libclxclient-3.9.0       
+  libclxclient-3.9.0
+  liblo
 
 and the corresponding header files. They are available at
 
@@ -16,4 +17,3 @@ definition of 'PREFIX' in the Makefile.
 Note: the 'make install' step is necessary to make
 the application work - it expects to find some files
 in $(PREFIX)/share/zita-at1.
-

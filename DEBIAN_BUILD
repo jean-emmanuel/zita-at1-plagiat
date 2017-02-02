@@ -1,6 +1,6 @@
 # Install Dependencies
 
-sudo apt install libclthreads-dev libclxclient-dev
+sudo apt install libclthreads-dev libclxclient-dev liblo-dev
 apt source zita-resampler
 cd zita-resampler-1.6.0/libs/
 make
