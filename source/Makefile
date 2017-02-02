@@ -24,7 +24,7 @@ SUFFIX := $(shell uname -m | sed -e 's/^unknown/$//' -e 's/^i.86/$//' -e 's/^x86
 LIBDIR = lib$(SUFFIX)
 BINDIR = $(PREFIX)/bin
 SHARED = $(PREFIX)/share/zita-at1
-VERSION = 0.4.1
+VERSION = 0.4.2
 CPPFLAGS += -MMD -MP -DVERSION=\"$(VERSION)\" -DSHARED=\"$(SHARED)\"
 CXXFLAGS += -O2 -ffast-math -Wall -MMD -MP
 CXXFLAGS += -march=native

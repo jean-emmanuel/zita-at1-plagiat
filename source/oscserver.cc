@@ -4,7 +4,7 @@ OSCServer::OSCServer( const int port )
 {
     std::string s = std::to_string(port);
     char const *portstr = s.c_str();
-    serverThread = lo_server_thread_new( portstr, NULL );
+    serverThread = lo_server_thread_new( portstr, error );
 	server = lo_server_thread_get_server( serverThread );
 }
 

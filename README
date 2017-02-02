@@ -3,6 +3,12 @@
 [forked zita-at1-plagiat]
 
 
+Version 0.4.2 (02/02/2017)
+--------------------------
+
+* Add osc control support and -p (port) command line option
+
+
 Version 0.4.1 (30/01/2017)
 --------------------------
 

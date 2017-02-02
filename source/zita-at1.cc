@@ -108,7 +108,8 @@ int main (int ac, char *av [])
     xresman.geometry (".geometry", display->xsize (), display->ysize (), 1, xp, yp, xs, ys);
 
 
-    int port = (xresman.get(".port", 0) == 0) ? 9900   : atof(xresman.get(".port", 0));
+    int port = (xresman.get(".port", 0) == 0) ? 0 : atof(xresman.get(".port", 0));
+
     oscserver = new OSCServer(port);
     oscserver->start();
 
