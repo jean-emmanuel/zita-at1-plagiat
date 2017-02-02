@@ -129,28 +129,47 @@ Mainwin::~Mainwin (void)
     RotaryCtl::fini ();
 }
 
+void Mainwin::set_rotary_value(int k, float v)
+{
+    _rotary[k]->set_value(v);
+}
+
+float Mainwin::get_rotary_value(int k)
+{
+    return _rotary[k]->value();
+}
+
 int Mainwin::osc_callback(const char *path, const char *types, lo_arg ** argv,
                 int argc, void *data, void *user_data)
 {
     int param = argv[0]->s;
-    double v = argv[1]->f;
+    float v = argv[1]->f;
     Mainwin *self = (Mainwin *)user_data;
+
     if (param == "t"[0]) {
-        self->_jclient->retuner ()->set_refpitch(v);
-        self->_rotary[param]->set_value(v); //SEGFAULT
+        self->set_rotary_value(0, v);
+        self->_jclient->retuner ()->set_refpitch(self->get_rotary_value(0));
     }
 
-    if (param == "b"[0])
-        self->_jclient->retuner ()->set_notebias(v);
+    else if (param == "b"[0]) {
+        self->set_rotary_value(1, v);
+        self->_jclient->retuner ()->set_notebias(self->get_rotary_value(1));
+    }
 
-    if (param == "f"[0])
-        self->_jclient->retuner ()->set_corrfilt(v);
+    else if (param == "f"[0]) {
+        self->set_rotary_value(2, v);
+        self->_jclient->retuner ()->set_corrfilt(self->get_rotary_value(2));
+    }
 
-    if (param == "c"[0])
-        self->_jclient->retuner ()->set_corrgain(v);
+    else if (param == "c"[0]) {
+        self->set_rotary_value(3, v);
+        self->_jclient->retuner ()->set_corrgain(self->get_rotary_value(3));
+    }
 
-    if (param == "o"[0])
-        self->_jclient->retuner ()->set_corroffs(v);
+    else if (param == "o"[0]) {
+        self->set_rotary_value(4, v);
+        self->_jclient->retuner ()->set_corroffs(self->get_rotary_value(4));
+    }
 
     return 0;
 }
